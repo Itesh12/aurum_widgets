@@ -3,8 +3,8 @@ import "package:flutter/services.dart";
 import "../utils/app_regex.dart";
 
 
-class AppTextField extends StatefulWidget {
-  const AppTextField({
+class AppTextField2 extends StatefulWidget {
+  const AppTextField2({
     required this.controller,
     required this.onTap,
     required this.focusNodeListener,
@@ -243,8 +243,3 @@ class _AppTextFieldState extends State<AppTextField> {
     );
   }
 }
-
-// import "package:flutter/material.dart";
-// import "package:flutter/services.dart";
-// 
-// import "../utils/app_regex.dart";
