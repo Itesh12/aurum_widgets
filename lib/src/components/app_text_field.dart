@@ -3,8 +3,8 @@ import "package:flutter/services.dart";
 import "../utils/app_regex.dart";
 
 
-class AppTextField2 extends StatefulWidget {
-  const AppTextField2({
+class AppTextField extends StatefulWidget {
+  const AppTextField({
     required this.controller,
     required this.onTap,
     required this.focusNodeListener,
