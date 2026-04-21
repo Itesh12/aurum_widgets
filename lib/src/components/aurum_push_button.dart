@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../utils/aurum_text.dart';
 import '../utils/spacing_extension.dart';
@@ -69,6 +70,7 @@ class _AurumPushButtonState extends State<AurumPushButton> {
         width: double.infinity,
         child: GestureDetector(
           onTap: () async {
+            HapticFeedback.lightImpact();
             _unfocus();
             _showShadow(true);
             await widget.onPressed();

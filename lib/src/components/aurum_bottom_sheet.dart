@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../utils/aurum_maybe_marquee.dart';
 import '../utils/aurum_text.dart';
@@ -201,6 +202,7 @@ class AurumBottomSheet {
                           ),
                           onTap: enabled
                               ? () {
+                                  HapticFeedback.lightImpact();
                                   temp.value = item;
                                 }
                               : null,
@@ -319,6 +321,7 @@ class AurumBottomSheet {
                         controlAffinity: ListTileControlAffinity.leading,
                         onChanged: enabled
                             ? (bool? value) {
+                                HapticFeedback.lightImpact();
                                 if (value ?? false) {
                                   temp.add(item);
                                 } else {
@@ -388,6 +391,7 @@ class AurumBottomSheet {
                       InkWell(
                         onTap: enabled
                             ? () {
+                                HapticFeedback.lightImpact();
                                 if (isSelected) {
                                   tempSelected.value = null; // Deselect
                                 } else {

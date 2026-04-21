@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
+import "package:get/get.dart";
 import "../utils/aurum_regex.dart";
 import "../utils/aurum_assets.dart";
 
@@ -230,7 +231,12 @@ class _AurumTextFieldState extends State<AurumTextField> {
       maxLength: widget.maxLength?.toInt(),
       onChanged: widget.onChanged,
       validator: widget.validator,
-      onTap: widget.onTap,
+      onTap: () {
+        if (widget.dropdownField) {
+          HapticFeedback.lightImpact();
+        }
+        widget.onTap?.call();
+      },
       showCursor: widget.dropdownField ? false : (widget.showCursor),
       onFieldSubmitted: widget.onFieldSubmitted,
       inputFormatters: <TextInputFormatter>[
