@@ -152,7 +152,7 @@ class _AppTextFieldState extends State<AppTextField> {
       showCursor: widget.showCursor,
       onFieldSubmitted: widget.onFieldSubmitted,
       inputFormatters: <TextInputFormatter>[
-        ...widget.inputFormatters ?? <TextInputFormatter>[],
+        ...?widget.inputFormatters,
         if (!widget.allowEmoji) ...[FilteringTextInputFormatter.deny(AppRegex().restrictEmojis)],
       ],
       enabled: widget.enabled ?? true,
