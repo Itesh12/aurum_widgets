@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "../utils/aurum_regex.dart";
+import "../utils/aurum_assets.dart";
 
 
 class AurumTextField extends StatefulWidget {
@@ -8,6 +9,7 @@ class AurumTextField extends StatefulWidget {
     required this.controller,
     required this.onTap,
     required this.focusNodeListener,
+    this.dropdownField = false,
     this.autovalidateMode,
     this.hintText,
     this.keyboardType,
@@ -81,6 +83,7 @@ class AurumTextField extends StatefulWidget {
   final bool? enableInteractiveSelection;
   final TextStyle? textStyle;
   final bool allowEmoji;
+  final bool dropdownField;
   final FloatingLabelBehavior? floatingLabelBehavior;
 
   @override
@@ -141,7 +144,7 @@ class _AurumTextFieldState extends State<AurumTextField> {
       keyboardType: widget.keyboardType ?? TextInputType.none,
       textCapitalization: widget.textCapitalization ?? TextCapitalization.words,
       textInputAction: widget.textInputAction ?? TextInputAction.next,
-      readOnly: widget.readOnly ?? false,
+      readOnly: widget.dropdownField ? true : (widget.readOnly ?? false),
       obscureText: widget.obscureText ?? false,
       minLines: widget.minLines.toInt(),
       maxLines: widget.maxLines?.toInt(),
@@ -149,7 +152,7 @@ class _AurumTextFieldState extends State<AurumTextField> {
       onChanged: widget.onChanged,
       validator: widget.validator,
       onTap: widget.onTap,
-      showCursor: widget.showCursor,
+      showCursor: widget.dropdownField ? false : (widget.showCursor),
       onFieldSubmitted: widget.onFieldSubmitted,
       inputFormatters: <TextInputFormatter>[
         ...?widget.inputFormatters,
@@ -215,7 +218,7 @@ class _AurumTextFieldState extends State<AurumTextField> {
                   )
                 : null),
         suffixIcon: widget.suffixIcon ??
-            (widget.suffixIconImage != null
+            ((widget.suffixIconImage != null || widget.dropdownField)
                 ? Align(
                     alignment: Alignment.centerRight,
                     heightFactor: 1.0,
@@ -223,11 +226,12 @@ class _AurumTextFieldState extends State<AurumTextField> {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Image.asset(
-                        widget.suffixIconImage ?? "",
+                        widget.suffixIconImage ?? (widget.dropdownField ? AurumAssetsImages().downArrowIcon : ""),
                         height: 24,
                         width: 24,
                         fit: BoxFit.contain,
                         color: scheme.primary,
+                        package: 'aurum_widgets',
                       ),
                     ),
                   )
