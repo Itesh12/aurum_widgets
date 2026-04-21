@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:flutter/services.dart";
 import "../utils/aurum_text.dart";
 
 import "../utils/spacing_extension.dart";
@@ -119,6 +120,7 @@ class AurumOutlinedButton extends StatelessWidget {
                 ),
               ),
         onPressed: () async {
+          HapticFeedback.lightImpact();
           _unfocus();
           await onPressed?.call();
         },
