@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../utils/app_maybe_marquee.dart';
-import '../utils/app_text.dart';
+import '../utils/aurum_maybe_marquee.dart';
+import '../utils/aurum_text.dart';
 import '../utils/spacing_extension.dart';
 
-class AppPushButton extends StatefulWidget {
-  const AppPushButton({
+class AurumPushButton extends StatefulWidget {
+  const AurumPushButton({
     required this.text,
     required this.onPressed,
     this.needIconButton = false,
@@ -29,10 +29,10 @@ class AppPushButton extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
 
   @override
-  State<AppPushButton> createState() => _AppPushButtonState();
+  State<AurumPushButton> createState() => _AurumPushButtonState();
 }
 
-class _AppPushButtonState extends State<AppPushButton> {
+class _AurumPushButtonState extends State<AurumPushButton> {
   final RxBool _showShadow = true.obs;
 
   @override
@@ -85,7 +85,7 @@ class _AppPushButtonState extends State<AppPushButton> {
                         ),
                         8.w,
                         Flexible(
-                          child: AppText.f16w600(
+                          child: AurumText.f16w600(
                             widget.text,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -94,7 +94,7 @@ class _AppPushButtonState extends State<AppPushButton> {
                         ),
                       ],
                     )
-                  : AppText.f16w600(
+                  : AurumText.f16w600(
                       widget.text,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
-class AppText extends StatelessWidget {
-  const AppText({
+class AurumText extends StatelessWidget {
+  const AurumText({
     required this.text,
     super.key,
     this.color,
@@ -16,7 +16,7 @@ class AppText extends StatelessWidget {
   });
 
   /// Font Size: 12 Font Weight 400,500,600
-  factory AppText.f12w400(
+  factory AurumText.f12w400(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -25,7 +25,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 12,
@@ -38,7 +38,7 @@ class AppText extends StatelessWidget {
     );
   }
 
-  factory AppText.f12w500(
+  factory AurumText.f12w500(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -47,7 +47,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 12,
@@ -60,7 +60,7 @@ class AppText extends StatelessWidget {
     );
   }
 
-  factory AppText.f12w600(
+  factory AurumText.f12w600(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -69,7 +69,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 12,
@@ -83,7 +83,7 @@ class AppText extends StatelessWidget {
   }
 
   /// Font Size: 14 Font Weight 400,500,600
-  factory AppText.f14w400(
+  factory AurumText.f14w400(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -92,7 +92,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 14,
@@ -105,7 +105,7 @@ class AppText extends StatelessWidget {
     );
   }
 
-  factory AppText.f14w500(
+  factory AurumText.f14w500(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -114,7 +114,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 14,
@@ -127,7 +127,7 @@ class AppText extends StatelessWidget {
     );
   }
 
-  factory AppText.f14w600(
+  factory AurumText.f14w600(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -136,7 +136,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 14,
@@ -150,7 +150,7 @@ class AppText extends StatelessWidget {
   }
 
   /// Font Size: 16 Font Weight 400,500,600
-  factory AppText.f16w400(
+  factory AurumText.f16w400(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -159,7 +159,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 16,
@@ -172,7 +172,7 @@ class AppText extends StatelessWidget {
     );
   }
 
-  factory AppText.f16w500(
+  factory AurumText.f16w500(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -181,7 +181,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 16,
@@ -194,7 +194,7 @@ class AppText extends StatelessWidget {
     );
   }
 
-  factory AppText.f16w600(
+  factory AurumText.f16w600(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -203,7 +203,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 16,
@@ -217,7 +217,7 @@ class AppText extends StatelessWidget {
   }
 
   /// Font Size: 18 Font Weight 400,500,600
-  factory AppText.f18w400(
+  factory AurumText.f18w400(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -226,7 +226,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 18,
@@ -239,7 +239,7 @@ class AppText extends StatelessWidget {
     );
   }
 
-  factory AppText.f18w500(
+  factory AurumText.f18w500(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -248,7 +248,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 18,
@@ -261,7 +261,7 @@ class AppText extends StatelessWidget {
     );
   }
 
-  factory AppText.f18w600(
+  factory AurumText.f18w600(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -270,7 +270,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 18,
@@ -282,7 +282,7 @@ class AppText extends StatelessWidget {
       maxLines: maxLines,
     );
   }
-  factory AppText.f20w600(
+  factory AurumText.f20w600(
     final String text, {
     final Color? color,
     TextAlign? textAlign,
@@ -291,7 +291,7 @@ class AppText extends StatelessWidget {
     final TextDecoration? decoration,
     final double? letterSpacing,
   }) {
-    return AppText(
+    return AurumText(
       text: text,
       color: color,
       fontSize: 20,

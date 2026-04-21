@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
-import "app_text.dart";
+import "aurum_text.dart";
 import "package:marquee/marquee.dart";
 
-class AppMaybeMarqueeText extends StatelessWidget {
-  const AppMaybeMarqueeText({
+class AurumMaybeMarqueeText extends StatelessWidget {
+  const AurumMaybeMarqueeText({
     required this.text,
     this.style,
     this.textAlign = TextAlign.start,
@@ -58,7 +58,7 @@ class AppMaybeMarqueeText extends StatelessWidget {
                 );
               }
 
-              return AppText(
+              return AurumText(
                 text: text,
                 fontSize: effectiveStyle.fontSize ?? 16,
                 fontWeight: effectiveStyle.fontWeight ?? FontWeight.w600,
@@ -92,7 +92,7 @@ class AppMaybeMarqueeText extends StatelessWidget {
                   );
                 }
 
-                return AppText(
+                return AurumText(
                   text: text,
                   fontSize: effectiveStyle.fontSize ?? 16,
                   fontWeight: effectiveStyle.fontWeight ?? FontWeight.w600,

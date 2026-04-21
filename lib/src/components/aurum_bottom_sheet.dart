@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../utils/app_maybe_marquee.dart';
-import '../utils/app_text.dart';
+import '../utils/aurum_maybe_marquee.dart';
+import '../utils/aurum_text.dart';
 import '../utils/spacing_extension.dart';
-import 'app_outlined_button.dart';
-import 'app_push_button.dart';
+import 'aurum_outlined_button.dart';
+import 'aurum_push_button.dart';
 
-class AppBottomSheet {
+class AurumBottomSheet {
   Future<void> showBottomSheet({
     required String title,
     required List<Widget> children,
@@ -47,7 +47,7 @@ class AppBottomSheet {
                 Container(
                   alignment: isCenterTitle ? Alignment.center : Alignment.centerLeft,
                   padding: isCenterTitle ? null : const EdgeInsets.only(left: 16),
-                  child: AppText.f18w600(
+                  child: AurumText.f18w600(
                     title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -58,7 +58,7 @@ class AppBottomSheet {
                 Container(
                   alignment: isCenterTitle ? Alignment.center : Alignment.centerLeft,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: AppText.f16w500(
+                  child: AurumText.f16w500(
                     subTitle,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -81,7 +81,7 @@ class AppBottomSheet {
                     16.w,
                     if (needDeclineButton)
                       Expanded(
-                        child: AppOutlinedButton(
+                        child: AurumOutlinedButton(
                           text: declineButtonText,
                           onPressed: () async {
                             if (shouldCloseBottomSheet) {
@@ -96,7 +96,7 @@ class AppBottomSheet {
                     if (needDeclineButton && needConfirmButton) 16.w else 0.w,
                     if (needConfirmButton)
                       Expanded(
-                        child: AppPushButton(
+                        child: AurumPushButton(
                           text: confirmButtonText,
                           onPressed: () async {
                             if (shouldCloseBottomSheet) {
@@ -167,7 +167,7 @@ class AppBottomSheet {
                           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                           value: item,
                           groupValue: temp.value,
-                          title: AppMaybeMarqueeText(
+                          title: AurumMaybeMarqueeText(
                             text: getText(item),
                             style: const TextStyle(
                               fontSize: 16,
@@ -246,7 +246,7 @@ class AppBottomSheet {
               contentPadding: const EdgeInsets.symmetric(horizontal: 16),
               activeColor: Theme.of(context).colorScheme.primary,
               value: rxSelectAll.value,
-              title: AppMaybeMarqueeText(
+              title: AurumMaybeMarqueeText(
                 text: selectAllLabel ?? "Select All",
                 style: const TextStyle(
                   fontSize: 16,
@@ -283,7 +283,7 @@ class AppBottomSheet {
                         dense: true,
                         contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                         value: isSelected,
-                        title: AppMaybeMarqueeText(
+                        title: AurumMaybeMarqueeText(
                           text: getText(item),
                           style: const TextStyle(
                             fontSize: 16,
@@ -389,7 +389,7 @@ class AppBottomSheet {
                               ),
                               const SizedBox(width: 12),
                               Expanded(
-                                child: AppMaybeMarqueeText(
+                                child: AurumMaybeMarqueeText(
                                   text: getText(item),
                                   style: const TextStyle(
                                     fontSize: 16,

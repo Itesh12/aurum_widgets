@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
-import "../utils/app_text.dart";
+import "../utils/aurum_text.dart";
 
 import "../utils/spacing_extension.dart";
 
-class AppOutlinedButton extends StatelessWidget {
-  const AppOutlinedButton({
+class AurumOutlinedButton extends StatelessWidget {
+  const AurumOutlinedButton({
     required this.text,
     this.buttonIconColor,
     required this.onPressed,
@@ -68,7 +68,7 @@ class AppOutlinedButton extends StatelessWidget {
                   ),
                   8.w,
                   Flexible(
-                    child: AppText.f16w500(
+                    child: AurumText.f16w500(
                       text,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -89,7 +89,7 @@ class AppOutlinedButton extends StatelessWidget {
               )
             : FittedBox(
                 fit: BoxFit.scaleDown,
-                child: AppText.f14w500(
+                child: AurumText.f14w500(
                   text,
                   color: buttonTextColor,
                 ),

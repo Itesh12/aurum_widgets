@@ -1,11 +1,11 @@
-class AppRegex {
-  factory AppRegex() {
+class AurumRegex {
+  factory AurumRegex() {
     return _singleton;
   }
 
-  AppRegex._internal();
+  AurumRegex._internal();
 
-  static final AppRegex _singleton = AppRegex._internal();
+  static final AurumRegex _singleton = AurumRegex._internal();
 
   final RegExp noWhiteSpace = RegExp(r"[a-z0-9@._%+\-]");
 

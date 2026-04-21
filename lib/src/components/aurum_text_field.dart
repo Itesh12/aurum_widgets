@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
-import "../utils/app_regex.dart";
+import "../utils/aurum_regex.dart";
 
 
-class AppTextField extends StatefulWidget {
-  const AppTextField({
+class AurumTextField extends StatefulWidget {
+  const AurumTextField({
     required this.controller,
     required this.onTap,
     required this.focusNodeListener,
@@ -84,10 +84,10 @@ class AppTextField extends StatefulWidget {
   final FloatingLabelBehavior? floatingLabelBehavior;
 
   @override
-  State<AppTextField> createState() => _AppTextFieldState();
+  State<AurumTextField> createState() => _AurumTextFieldState();
 }
 
-class _AppTextFieldState extends State<AppTextField> {
+class _AurumTextFieldState extends State<AurumTextField> {
   late FocusNode focusNode;
 
   @override
@@ -98,7 +98,7 @@ class _AppTextFieldState extends State<AppTextField> {
   }
 
   @override
-  void didUpdateWidget(covariant AppTextField oldWidget) {
+  void didUpdateWidget(covariant AurumTextField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.focusNode != oldWidget.focusNode) {
       oldWidget.focusNode?.removeListener(listener);
@@ -153,7 +153,7 @@ class _AppTextFieldState extends State<AppTextField> {
       onFieldSubmitted: widget.onFieldSubmitted,
       inputFormatters: <TextInputFormatter>[
         ...?widget.inputFormatters,
-        if (!widget.allowEmoji) ...[FilteringTextInputFormatter.deny(AppRegex().restrictEmojis)],
+        if (!widget.allowEmoji) ...[FilteringTextInputFormatter.deny(AurumRegex().restrictEmojis)],
       ],
       enabled: widget.enabled ?? true,
       autofillHints: widget.autofillHints,
