@@ -26,6 +26,41 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class MockAddressProvider extends AurumAddressProvider {
+  @override
+  Future<List<AurumCountry>> fetchCountries() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return [
+      AurumCountry(id: 1, name: "India", states: [
+        AurumState(id: 10, name: "Gujarat", cities: [
+          AurumCity(id: 101, name: "Ahmedabad"),
+          AurumCity(id: 102, name: "Surat"),
+        ]),
+      ]),
+      AurumCountry(id: 2, name: "USA"),
+    ];
+  }
+
+  @override
+  Future<AurumPinCodeData?> fetchLocationByPincode(String pincode) async {
+    await Future.delayed(const Duration(seconds: 1));
+    if (pincode == "380001") {
+      return AurumPinCodeData(
+        pinCode: "380001",
+        district: "Ahmedabad",
+        taluka: "Ahmedabad City",
+        stateName: "Gujarat",
+        countryName: "India",
+        areaList: [
+          AurumAreaData(name: "Lal Darwaja", block: "Ahmedabad City", district: "Ahmedabad"),
+          AurumAreaData(name: "Khadia", block: "Ahmedabad City", district: "Ahmedabad"),
+        ],
+      );
+    }
+    return null;
+  }
+}
+
 class DemoPage extends StatefulWidget {
   const DemoPage({super.key});
 
@@ -37,6 +72,14 @@ class _DemoPageState extends State<DemoPage> {
   final TextEditingController _textController = TextEditingController();
   final TextEditingController _dropdownController = TextEditingController();
   final RxString _selectedBranch = "Main Office".obs;
+
+  late final AurumAddressController _addressController;
+
+  @override
+  void initState() {
+    super.initState();
+    _addressController = Get.put(AurumAddressController(provider: MockAddressProvider()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +93,16 @@ class _DemoPageState extends State<DemoPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            AurumText.f18w600("Address Widget"),
+            16.h,
+            AurumAddressWidget(
+              controller: _addressController,
+              isPincodeRequired: true,
+            ),
+            Obx(() => _addressController.isLoading.value
+                ? const LinearProgressIndicator()
+                : const SizedBox.shrink()),
+            32.h,
             AurumText.f18w600("Text Fields"),
             16.h,
             AurumTextField(
@@ -76,11 +129,42 @@ class _DemoPageState extends State<DemoPage> {
               },
             ),
             16.h,
+            const AurumElevatedButton(
+              text: "Elevated Button (Active)",
+              onPressed: null, // Just for UI demo
+            ),
+            16.h,
             AurumOutlinedButton(
               text: "Outlined Button",
               onPressed: () {
                 Get.snackbar("Info", "Secondary action triggered");
               },
+            ),
+            32.h,
+            AurumText.f18w600("Media & Animations"),
+            16.h,
+            const Row(
+              children: [
+                Expanded(
+                  child: AurumCachedImage(
+                    imageUrl: "https://picsum.photos/200/200",
+                    fit: BoxFit.cover,
+                    height: 150,
+                    circleView: true,
+                  ),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: Center(
+                    child: Icon(Icons.animation, size: 50, color: Colors.blue),
+                  ),
+                ),
+              ],
+            ),
+            16.h,
+            AurumText.f14w400(
+              "Note: Ported AurumLottieWidget is ready for your .json assets!",
+              color: Colors.grey,
             ),
             32.h,
             AurumText.f18w600("Typography"),
@@ -90,7 +174,8 @@ class _DemoPageState extends State<DemoPage> {
             AurumText.f14w400("Body text 14w400 - clean and consistent."),
             16.h,
             const AurumMaybeMarqueeText(
-              text: "This is a very long text that will automatically start scrolling if it doesn't fit in the available width, which is perfect for headers or labels in tight spaces.",
+              text:
+                  "This is a very long text that will automatically start scrolling if it doesn't fit in the available width, which is perfect for headers or labels in tight spaces.",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             32.h,
