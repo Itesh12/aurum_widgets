@@ -8,7 +8,7 @@ class AurumTextField extends StatefulWidget {
   const AurumTextField({
     required this.controller,
     required this.onTap,
-    required this.focusNodeListener,
+    this.focusNodeListener,
     this.dropdownField = false,
     this.autovalidateMode,
     this.hintText,
@@ -72,7 +72,7 @@ class AurumTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final EdgeInsets? contentPadding;
-  final void Function({required bool hasFocus}) focusNodeListener;
+  final void Function({required bool hasFocus})? focusNodeListener;
   final bool needSmallTextSize;
   final FocusNode? focusNode;
   final num minLines;
@@ -124,7 +124,7 @@ class _AurumTextFieldState extends State<AurumTextField> {
     super.dispose();
   }
 
-  void listener() => widget.focusNodeListener(hasFocus: focusNode.hasFocus);
+  void listener() => widget.focusNodeListener?.call(hasFocus: focusNode.hasFocus);
 
   @override
   Widget build(BuildContext context) {
