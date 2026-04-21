@@ -3,6 +3,7 @@ import "../utils/aurum_text.dart";
 
 import "../utils/spacing_extension.dart";
 
+/// A custom outlined button with a modern look and consistent padding.
 class AurumOutlinedButton extends StatelessWidget {
   const AurumOutlinedButton({
     required this.text,
@@ -20,17 +21,40 @@ class AurumOutlinedButton extends StatelessWidget {
     super.key,
   });
 
+  /// Whether to show an icon.
   final bool needIcon;
+
+  /// A custom widget to show as the icon.
   final Widget icon;
+
+  /// The text to display on the button.
   final String text;
+
+  /// Custom color for the icon.
   final Color? buttonIconColor;
+
+  /// Called when the button is pressed.
   final Function()? onPressed;
+
+  /// Whether to show an image-based icon.
   final bool needIconbutton;
+
+  /// Whether the image-based icon should be at the end of the text.
   final bool needSuffixIcon;
+
+  /// The image path for the button icon.
   final String iconButtonImage;
+
+  /// Custom color for the button text.
   final Color? buttonTextColor;
+
+  /// Custom color for the button border.
   final Color? buttonBorderColor;
+
+  /// Custom color for the dynamic background.
   final Color? backgroundColor;
+
+  /// Custom text style for the label.
   final TextStyle? textStyle;
 
   @override

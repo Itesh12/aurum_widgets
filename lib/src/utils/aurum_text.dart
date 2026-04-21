@@ -1,5 +1,9 @@
 import "package:flutter/material.dart";
 
+/// A standardized text widget for the Aurum design system.
+///
+/// Provides factory constructors for common font sizes (12, 14, 16, 18, 20) 
+/// and weights (400, 500, 600).
 class AurumText extends StatelessWidget {
   const AurumText({
     required this.text,
@@ -15,7 +19,7 @@ class AurumText extends StatelessWidget {
     this.height,
   });
 
-  /// Font Size: 12 Font Weight 400,500,600
+  /// Font Size: 12, Font Weight: 400 (Regular)
   factory AurumText.f12w400(
     final String text, {
     final Color? color,

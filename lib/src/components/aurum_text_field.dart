@@ -4,6 +4,10 @@ import "../utils/aurum_regex.dart";
 import "../utils/aurum_assets.dart";
 
 
+/// A highly customizable text field with support for icons, validation, 
+/// and a special [dropdownField] mode.
+///
+/// Use [dropdownField] true to make the field read-only and show a dropdown arrow.
 class AurumTextField extends StatefulWidget {
   const AurumTextField({
     required this.controller,
@@ -47,43 +51,118 @@ class AurumTextField extends StatefulWidget {
     super.key,
   });
 
+  /// Whether to autofocus the field on load.
   final bool? autofocus;
+
+  /// The controller for the text being edited.
   final TextEditingController controller;
+
+  /// The type of information for which to optimize the text input control.
   final TextInputType? keyboardType;
+
+  /// Configures how the field validates itself.
   final AutovalidateMode? autovalidateMode;
+
+  /// Configures how the text should be capitalized.
   final TextCapitalization? textCapitalization;
+
+  /// The action the user takes when they finish entering text in the field.
   final TextInputAction? textInputAction;
+
+  /// Whether the field is read-only.
   final bool? readOnly;
+
+  /// An image path to show as a prefix icon.
   final String? prefixIconImage;
+
+  /// An image path to show as a suffix icon.
   final String? suffixIconImage;
+
+  /// Whether to hide the text being edited (e.g., for passwords).
   final bool? obscureText;
+
+  /// The maximum number of lines for the field.
   final num? maxLines;
+
+  /// The maximum number of characters allowed.
   final num? maxLength;
+
+  /// Called when the text being edited changes.
   final void Function(String)? onChanged;
+
+  /// A function that takes the current value and returns an error string if invalid.
   final String? Function(String?)? validator;
+
+  /// Called when the user taps on the text field.
   final void Function()? onTap;
+
+  /// Optional input formatters to apply during editing.
   final List<TextInputFormatter>? inputFormatters;
+
+  /// Whether the field is enabled.
   final bool? enabled;
+
+  /// Hints for the platform's autofill service.
   final Iterable<String>? autofillHints;
+
+  /// Text that describes the input field.
   final String? labelText;
+
+  /// Text that suggests what sort of input the field accepts.
   final String? hintText;
+
+  /// Custom style for the label text.
   final TextStyle? labelStyle;
+
+  /// Custom style for the hint text.
   final TextStyle? hintStyle;
+
+  /// A custom widget to show as a prefix icon.
   final Widget? prefixIcon;
+
+  /// A custom widget to show as a suffix icon.
   final Widget? suffixIcon;
+
+  /// Optional padding around the content.
   final EdgeInsets? contentPadding;
+
+  /// A callback that provides focus status updates.
   final void Function({required bool hasFocus})? focusNodeListener;
+
+  /// Whether to use slightly smaller text sizes.
   final bool needSmallTextSize;
+
+  /// An optional focus node to use.
   final FocusNode? focusNode;
+
+  /// The minimum number of lines for the field.
   final num minLines;
+
+  /// The color of the border when the field is enabled.
   final Color? enableBorderColor;
+
+  /// Whether to show the cursor.
   final bool showCursor;
+
+  /// Called when the user submits the field (e.g., presses "Done" on keyboard).
   final void Function(String)? onFieldSubmitted;
+
+  /// Whether to hide the error text even if validation fails.
   final bool hideErrorText;
+
+  /// Whether to enable interactive selection (copy/paste).
   final bool? enableInteractiveSelection;
+
+  /// Custom text style for the input.
   final TextStyle? textStyle;
+
+  /// Whether to allow emojis in the input.
   final bool allowEmoji;
+
+  /// When true, makes the field read-only and automatically shows a dropdown icon.
   final bool dropdownField;
+
+  /// Configures the behavior of the floating label.
   final FloatingLabelBehavior? floatingLabelBehavior;
 
   @override

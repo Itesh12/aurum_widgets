@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../utils/aurum_maybe_marquee.dart';
 import '../utils/aurum_text.dart';
 import '../utils/spacing_extension.dart';
 
+/// A custom push button with a shadow effect and optional icon support.
+///
+/// Uses [GetX] for animation state management.
 class AurumPushButton extends StatefulWidget {
   const AurumPushButton({
     required this.text,
@@ -18,14 +20,31 @@ class AurumPushButton extends StatefulWidget {
     super.key,
   });
 
+  /// The text to display on the button.
   final String text;
+
+  /// Called when the button is tapped.
   final Function() onPressed;
+
+  /// Whether to show an icon inside the button.
   final bool needIconButton;
+
+  /// The image path for the button icon.
   final String iconButtonImage;
+
+  /// Custom color for the button text.
   final Color? buttonTextColor;
+
+  /// Custom color for the button background.
   final Color? buttonBackgroundColor;
+
+  /// Custom color for the button border.
   final Color? buttonBorderColor;
+
+  /// Custom color for the icon.
   final Color? iconButtonColor;
+
+  /// Optional padding around the button.
   final EdgeInsetsGeometry? padding;
 
   @override

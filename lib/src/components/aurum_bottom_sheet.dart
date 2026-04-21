@@ -6,7 +6,17 @@ import '../utils/spacing_extension.dart';
 import 'aurum_outlined_button.dart';
 import 'aurum_push_button.dart';
 
+/// A utility class to show various types of bottom sheets.
+///
+/// Supported types:
+/// - Standard bottom sheet with children.
+/// - Radio button selection list [showRBBottomSheet].
+/// - Checkbox selection list [showCBBottomSheet].
+/// - Single selection checkbox list [showSingleSelectBottomSheet].
 class AurumBottomSheet {
+  /// Shows a standard bottom sheet with a title, subTitle, and a list of children widgets.
+  /// 
+  /// Provides optional [confirm] and [decline] buttons.
   Future<void> showBottomSheet({
     required String title,
     required List<Widget> children,
@@ -135,6 +145,9 @@ class AurumBottomSheet {
     );
   }
 
+  /// Shows a Radio Button (RB) selection bottom sheet.
+  /// 
+  /// The user can select exactly one item from the [originalList].
   Future<T?> showRBBottomSheet<T>({
     required BuildContext context,
     required String title,
@@ -162,11 +175,22 @@ class AurumBottomSheet {
                   () {
                     return Column(
                       children: <Widget>[
-                        RadioListTile<T>(
+                        ListTile(
                           dense: true,
                           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                          value: item,
-                          groupValue: temp.value,
+                          leading: Radio<T>(
+                            value: item,
+                            // ignore: deprecated_member_use
+                            groupValue: temp.value,
+                            activeColor: Theme.of(context).colorScheme.primary,
+                            // ignore: deprecated_member_use
+                            onChanged: enabled
+                                ? (T? value) {
+                                    temp.value = value;
+                                  }
+                                : null,
+                            toggleable: true,
+                          ),
                           title: AurumMaybeMarqueeText(
                             text: getText(item),
                             style: const TextStyle(
@@ -175,13 +199,11 @@ class AurumBottomSheet {
                             ),
                             textAlign: TextAlign.left,
                           ),
-                          controlAffinity: ListTileControlAffinity.leading,
-                          onChanged: enabled
-                              ? (T? value) {
-                                  temp.value = value;
+                          onTap: enabled
+                              ? () {
+                                  temp.value = item;
                                 }
                               : null,
-                          toggleable: true,
                         ),
                         if (!isLast)
                           const Divider(
@@ -212,6 +234,9 @@ class AurumBottomSheet {
     return selectedItem.value;
   }
 
+  /// Shows a Checkbox (CB) selection bottom sheet.
+  /// 
+  /// The user can select multiple items from the [originalList].
   Future<List<T>> showCBBottomSheet<T>({
     required BuildContext context,
     required String title,
@@ -330,6 +355,9 @@ class AurumBottomSheet {
     return temp.toList();
   }
 
+  /// Shows a single selection checkbox list bottom sheet.
+  /// 
+  /// Unlike [showRBBottomSheet], this uses checkboxes which appear as single-select radios.
   Future<T?> showSingleSelectBottomSheet<T>({
     required BuildContext context,
     required String title,
