@@ -2,6 +2,10 @@ import "package:flutter/material.dart";
 import "aurum_text.dart";
 import "package:marquee/marquee.dart";
 
+/// A text widget that automatically scrolls (Marquee) if the text overflows 
+/// the available horizontal space.
+/// 
+/// If the text fits within the space, it renders as a standard [AurumText].
 class AurumMaybeMarqueeText extends StatelessWidget {
   const AurumMaybeMarqueeText({
     required this.text,
@@ -13,11 +17,22 @@ class AurumMaybeMarqueeText extends StatelessWidget {
     super.key,
   });
 
+  /// The text to display.
   final String text;
+
+  /// The style to use for the text.
   final TextStyle? style;
+
+  /// How the text should be aligned horizontally.
   final TextAlign textAlign;
+
+  /// The maximum number of lines to show before marquee/ellipsis kicks in.
   final int? maxLines;
+
+  /// Whether to align the text based on an information icon context.
   final bool infoIconAlign;
+
+  /// How visual overflow should be handled.
   final TextOverflow? overflow;
 
   @override

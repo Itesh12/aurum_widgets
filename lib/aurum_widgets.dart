@@ -7,6 +7,7 @@
 /// - [AurumBottomSheet]: A collection of interactive selection menus.
 /// - [AurumText]: Standardized Typography.
 library;
+export 'src/components/aurum_bottom_sheet.dart';
 export 'src/components/aurum_outlined_button.dart';
 export 'src/components/aurum_push_button.dart';
 export 'src/components/aurum_text_field.dart';

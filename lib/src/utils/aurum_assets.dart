@@ -1,3 +1,4 @@
+/// A utility class that holds paths for images and icons bundled with the plugin.
 class AurumAssetsImages {
   factory AurumAssetsImages() {
     return _singleton;
