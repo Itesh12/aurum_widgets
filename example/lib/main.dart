@@ -131,7 +131,7 @@ class _DemoPageState extends State<DemoPage> {
             16.h,
             const AurumElevatedButton(
               text: "Elevated Button (Active)",
-              onPressed: null, // Just for UI demo
+              onPressed: null,
             ),
             16.h,
             AurumOutlinedButton(
@@ -139,6 +139,65 @@ class _DemoPageState extends State<DemoPage> {
               onPressed: () {
                 Get.snackbar("Info", "Secondary action triggered");
               },
+            ),
+            32.h,
+            AurumText.f18w600("Authentication Components"),
+            16.h,
+            Row(
+              children: [
+                AurumText.f16w500("Login Section"),
+                8.w,
+                AurumInformationButton(message: "Tooltip explaining login requirements"),
+              ],
+            ),
+            8.h,
+            AurumPasswordValidator(password: "Pass123!"),
+            16.h,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AurumText.f14w400("Finished?"),
+                 AurumTextButton(
+                  text: "Resend Code",
+                  onPressed: () {
+                    Get.snackbar("Auth", "Resend triggered");
+                  },
+                ),
+              ],
+            ),
+            16.h,
+            AurumText.f16w500("OTP Verification"),
+            8.h,
+            Center(
+              child: AurumPinInput(
+                onCompleted: (pin) {
+                  Get.snackbar("OTP", "Pin entered: $pin");
+                },
+              ),
+            ),
+            16.h,
+            AurumTimerCountdown(
+              endTime: DateTime.now().add(const Duration(minutes: 2)),
+              onEnd: () {
+                Get.snackbar("Timer", "Time up!");
+              },
+            ),
+            32.h,
+            AurumText.f18w600("Social Connect"),
+            16.h,
+            AurumSocialButton(
+              type: AurumSocialType.google,
+              onPressed: () => Get.snackbar("Social", "Google Login"),
+            ),
+            12.h,
+            AurumSocialButton(
+              type: AurumSocialType.apple,
+              onPressed: () => Get.snackbar("Social", "Apple Login"),
+            ),
+            32.h,
+            AurumPushButton(
+              text: "Launch Onboarding Pager",
+              onPressed: () => _showOnboarding(),
             ),
             32.h,
             AurumText.f18w600("Media & Animations"),
@@ -161,11 +220,6 @@ class _DemoPageState extends State<DemoPage> {
                 ),
               ],
             ),
-            16.h,
-            AurumText.f14w400(
-              "Note: Ported AurumLottieWidget is ready for your .json assets!",
-              color: Colors.grey,
-            ),
             32.h,
             AurumText.f18w600("Typography"),
             16.h,
@@ -174,8 +228,7 @@ class _DemoPageState extends State<DemoPage> {
             AurumText.f14w400("Body text 14w400 - clean and consistent."),
             16.h,
             const AurumMaybeMarqueeText(
-              text:
-                  "This is a very long text that will automatically start scrolling if it doesn't fit in the available width, which is perfect for headers or labels in tight spaces.",
+              text: "This is a very long text that will automatically start scrolling if it doesn't fit in the available width.",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             32.h,
@@ -189,6 +242,32 @@ class _DemoPageState extends State<DemoPage> {
         ),
       ),
     );
+  }
+
+  void _showOnboarding() {
+    Get.to(() => Scaffold(
+      appBar: AppBar(title: const Text("Onboarding Demo")),
+      body: AurumOnboardingPager(
+        contents: const [
+          AurumOnboardingContent(
+            title: "Welcome to Aurum",
+            description: "Premium UI components for your next big project.",
+            imagePath: "assets/images/placeholder_image.png",
+          ),
+          AurumOnboardingContent(
+            title: "Fast & Modular",
+            description: "Easily integrate authentication and data flows.",
+            imagePath: "assets/images/placeholder_image.png",
+          ),
+          AurumOnboardingContent(
+            title: "Ready to Start?",
+            description: "Build something amazing with our widget suite.",
+            imagePath: "assets/images/placeholder_image.png",
+          ),
+        ],
+        onFinish: () => Get.back(),
+      ),
+    ));
   }
 
   void _showBranchPicker() {

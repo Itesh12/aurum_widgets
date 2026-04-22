@@ -12,4 +12,8 @@ class AurumAssetsImages {
   final String placeholderImage01 = "assets/images/placeholder_profile.png";
   final String coverBrokenImage = "assets/images/cover_broken.png";
   final String logoBrokenImage = "assets/images/logo_broken.png";
+
+  final String googleLogo = "assets/icons/google_logo.png";
+  final String appleLogo = "assets/icons/apple_logo.png";
+  final String facebookLogo = "assets/icons/facebook_logo.png";
 }

@@ -16,6 +16,13 @@ export 'src/components/aurum_lottie_widget.dart';
 export 'src/components/aurum_outlined_button.dart';
 export 'src/components/aurum_push_button.dart';
 export 'src/components/aurum_text_field.dart';
+export 'src/components/aurum_text_button.dart';
+export 'src/components/aurum_information_button.dart';
+export 'src/components/aurum_pin_input.dart';
+export 'src/components/aurum_timer_countdown.dart';
+export 'src/components/aurum_password_validator.dart';
+export 'src/components/aurum_onboarding_view.dart';
+export 'src/components/aurum_social_button.dart';
 
 export 'src/models/address_models.dart';
 
