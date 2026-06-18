@@ -147,11 +147,11 @@ class _DemoPageState extends State<DemoPage> {
               children: [
                 AurumText.f16w500("Login Section"),
                 8.w,
-                AurumInformationButton(message: "Tooltip explaining login requirements"),
+                const AurumInformationButton(message: "Tooltip explaining login requirements"),
               ],
             ),
             8.h,
-            AurumPasswordValidator(password: "Pass123!"),
+            const AurumPasswordValidator(password: "Pass123!"),
             16.h,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
