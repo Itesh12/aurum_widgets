@@ -359,8 +359,16 @@ class AurumBottomSheet {
   }
 
   /// Shows a single selection checkbox list bottom sheet.
-  /// 
+  ///
   /// Unlike [showRBBottomSheet], this uses checkboxes which appear as single-select radios.
+  ///
+  /// **Default behaviour** (`needConfirmButton` and `needDeclineButton` are both `false`):
+  /// Tapping an option immediately closes the sheet and returns the selected value.
+  ///
+  /// **With buttons** (set [needConfirmButton] and/or [needDeclineButton] to `true`):
+  /// Tapping an option only selects / deselects it. The sheet stays open until the
+  /// user taps a button, at which point [onConfirm] / [onDecline] is called and the
+  /// sheet closes.
   Future<T?> showSingleSelectBottomSheet<T>({
     required BuildContext context,
     required String title,
@@ -369,96 +377,181 @@ class AurumBottomSheet {
     bool enabled = true,
     Widget customWidget = const SizedBox(),
     required String Function(T) getText,
+    bool needConfirmButton = false,
+    bool needDeclineButton = false,
+    String confirmButtonText = 'Submit',
+    String declineButtonText = 'Cancel',
+    Function()? onConfirm,
+    Function()? onDecline,
   }) async {
-    final Rx<T?> tempSelected = Rx<T?>(selectedItem);
+    T? result = selectedItem;
+    final bool hasButtons = needConfirmButton || needDeclineButton;
 
-    await showBottomSheet(
-      title: title,
-      children: <Widget>[
-        customWidget,
-        SingleChildScrollView(
-          child: Column(
-            children: List<Widget>.generate(
-              originalList.length,
-              (int index) {
-                final T item = originalList[index];
-                final bool isLast = (originalList.length - 1) == index;
+    await showModalBottomSheet<void>(
+      context: context,
+      elevation: 4,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(32),
+          topRight: Radius.circular(32),
+        ),
+        side: BorderSide(color: Theme.of(context).colorScheme.primary),
+      ),
+      isScrollControlled: true,
+      builder: (BuildContext sheetContext) {
+        return StatefulBuilder(
+          builder: (BuildContext ctx, StateSetter setSheetState) {
+            return Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(sheetContext).viewInsets.bottom,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(sheetContext).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    height: 4,
+                    width: Get.width / 6,
+                  ).paddingSymmetric(vertical: 16),
+                  if (title.isNotEmpty)
+                    Container(
+                      alignment: Alignment.center,
+                      child: AurumText.f18w600(
+                        title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ).paddingOnly(bottom: 16),
+                    ),
+                  customWidget,
+                  Flexible(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: List<Widget>.generate(
+                          originalList.length,
+                          (int index) {
+                            final T item = originalList[index];
+                            final bool isLast = (originalList.length - 1) == index;
+                            final bool isSelected = result == item;
 
-                return Obx(() {
-                  final bool isSelected = tempSelected.value == item;
-                  return Column(
-                    children: <Widget>[
-                      InkWell(
-                        onTap: enabled
-                            ? () {
-                                HapticFeedback.lightImpact();
-                                if (isSelected) {
-                                  tempSelected.value = null; // Deselect
-                                } else {
-                                  tempSelected.value = item; // Select
-                                }
-                              }
-                            : null,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 12,
-                          ),
-                          child: Row(
-                            children: <Widget>[
-                              Checkbox(
-                                value: isSelected,
-                                shape: const CircleBorder(),
-                                onChanged: enabled
-                                    ? (bool? newValue) {
-                                        if (isSelected) {
-                                          tempSelected.value = null;
-                                        } else {
-                                          tempSelected.value = item;
+                            return Column(
+                              children: <Widget>[
+                                InkWell(
+                                  onTap: enabled
+                                      ? () {
+                                          HapticFeedback.lightImpact();
+                                          if (hasButtons) {
+                                            // With buttons: only update selection, keep sheet open.
+                                            setSheetState(() {
+                                              result = isSelected ? null : item;
+                                            });
+                                          } else {
+                                            // No buttons: close immediately with the selection.
+                                            result = isSelected ? null : item;
+                                            Navigator.of(sheetContext).pop();
+                                          }
                                         }
-                                      }
-                                    : null,
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: AurumMaybeMarqueeText(
-                                  text: getText(item),
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
+                                      : null,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 12,
+                                    ),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Checkbox(
+                                          value: isSelected,
+                                          shape: const CircleBorder(),
+                                          onChanged: enabled
+                                              ? (bool? _) {
+                                                  if (hasButtons) {
+                                                    setSheetState(() {
+                                                      result = isSelected ? null : item;
+                                                    });
+                                                  } else {
+                                                    result = isSelected ? null : item;
+                                                    Navigator.of(sheetContext).pop();
+                                                  }
+                                                }
+                                              : null,
+                                        ),
+                                        const SizedBox(width: 12),
+                                        Expanded(
+                                          child: AurumMaybeMarqueeText(
+                                            text: getText(item),
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                            textAlign: TextAlign.left,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  textAlign: TextAlign.left,
                                 ),
-                              ),
-                            ],
-                          ),
+                                if (!isLast)
+                                  const Divider(
+                                    indent: 16,
+                                    endIndent: 16,
+                                  ),
+                              ],
+                            );
+                          },
                         ),
                       ),
-                      if (!isLast)
-                        const Divider(
-                          indent: 16,
-                          endIndent: 16,
-                        ),
-                    ],
-                  );
-                });
-              },
-            ),
-          ),
-        ),
-      ],
-      shouldCloseBottomSheet: false,
-      needDeclineButton: true,
-      needConfirmButton: true,
-      onDecline: () {
-        Navigator.of(context).pop();
-      },
-      onConfirm: () {
-        Navigator.of(context).pop();
+                    ),
+                  ),
+                  16.h,
+                  if (hasButtons)
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        16.w,
+                        if (needDeclineButton)
+                          Expanded(
+                            child: AurumOutlinedButton(
+                              text: declineButtonText,
+                              onPressed: () {
+                                Navigator.of(sheetContext).pop();
+                                onDecline?.call();
+                              },
+                            ),
+                          )
+                        else
+                          const SizedBox(),
+                        if (needDeclineButton && needConfirmButton) 16.w else 0.w,
+                        if (needConfirmButton)
+                          Expanded(
+                            child: AurumPushButton(
+                              text: confirmButtonText,
+                              onPressed: () {
+                                Navigator.of(sheetContext).pop();
+                                onConfirm?.call();
+                              },
+                            ),
+                          )
+                        else
+                          const SizedBox(),
+                        16.w,
+                      ],
+                    ).paddingOnly(bottom: 16),
+                  SizedBox(height: MediaQuery.of(sheetContext).padding.bottom / 2 + (hasButtons ? 0 : 16)),
+                ],
+              ),
+            );
+          },
+        );
       },
     );
 
-    return tempSelected.value;
+    return result;
   }
 
   static void _defaultFunction() {}

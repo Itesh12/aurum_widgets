@@ -23,6 +23,8 @@ export 'src/components/aurum_timer_countdown.dart';
 export 'src/components/aurum_password_validator.dart';
 export 'src/components/aurum_onboarding_view.dart';
 export 'src/components/aurum_social_button.dart';
+export 'src/components/aurum_status_view.dart';
+
 
 export 'src/models/address_models.dart';
 
